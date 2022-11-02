@@ -1,21 +1,10 @@
+import { Client, Collection, ClientOptions, Events } from "discord.js";
+import fs from "fs";
 import "dotenv/config";
-import { Client, ClientOptions } from "discord.js";
+import { GalaxyClient, GalaxyCommand, GalaxyEvent } from "./interfaces/galaxy";
 
-class GalaxyClient extends Client {
-    constructor(token: string, clientOptions: ClientOptions) {
-        super(clientOptions);
 
-        this.token = token;
-    }
 
-    public start() {
-        if (!this.token) throw new Error("No token provided");
-
-        this.login(this.token);
-    }
-
-}
-
-const client = new GalaxyClient(process.env.token, { intents: ["Guilds"] });
+const client = new GalaxyClient(process.env.TOKEN ?? null, { intents: ["Guilds"] });
 
 client.start()
