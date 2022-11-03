@@ -1,0 +1,12 @@
+{
+    "arrowParens": "always",
+    "bracketSpacing": true,
+    "embeddedLanguageFormatting": "auto",
+    "useTabs": false,
+    "semi": true,
+    "printWidth": 100,
+    "singleQuote": true,
+    "tabWidth": 4,
+    "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true
+}

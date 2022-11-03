@@ -1,10 +1,8 @@
-import { Client, Collection, ClientOptions, Events } from "discord.js";
-import fs from "fs";
-import "dotenv/config";
-import { GalaxyClient, GalaxyCommand, GalaxyEvent } from "./interfaces/galaxy";
+import { GalaxyClient, GalaxyCommand, GalaxyEvent } from './interfaces/galaxy';
+import { Client, ClientOptions, Collection, Events } from 'discord.js';
+import 'dotenv/config';
+import fs from 'fs';
 
+const client = new GalaxyClient(process.env.TOKEN ?? null, { intents: ['Guilds'] });
 
-
-const client = new GalaxyClient(process.env.TOKEN ?? null, { intents: ["Guilds"] });
-
-client.start()
+client.start();

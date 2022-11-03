@@ -1,5 +1,5 @@
-import { Events, Interaction } from "discord.js";
-import { GalaxyEvent } from "../interfaces/galaxy";
+import { GalaxyEvent } from '../interfaces/galaxy';
+import { Events, Interaction } from 'discord.js';
 
 const event: GalaxyEvent = {
     name: Events.InteractionCreate,
@@ -13,12 +13,14 @@ const event: GalaxyEvent = {
 
         try {
             await command.run(client, interaction);
-        }
-        catch (error) {
+        } catch (error) {
             console.error(error);
-            await interaction.reply({ content: "There was an error while executing this command!", ephemeral: true });
+            await interaction.reply({
+                content: 'There was an error while executing this command!',
+                ephemeral: true,
+            });
         }
-    }
-}
+    },
+};
 
 export default event;
