@@ -1,4 +1,12 @@
-import { Client, ClientOptions, Collection, Events, SlashCommandBuilder } from 'discord.js';
+import { PrismaClient } from '@prisma/client';
+import {
+    Client,
+    ClientOptions,
+    Collection,
+    Events,
+    SlashCommandBuilder,
+    SlashCommandSubcommandsOnlyBuilder,
+} from 'discord.js';
 import fs from 'fs';
 
 interface GalaxyEvent {
@@ -8,11 +16,14 @@ interface GalaxyEvent {
 }
 
 interface GalaxyCommand {
-    data: SlashCommandBuilder;
+    data:
+        | Omit<SlashCommandBuilder, 'addSubcommandGroup' | 'addSubcommand'>
+        | SlashCommandSubcommandsOnlyBuilder;
     run: (client: GalaxyClient, interaction: any) => void;
 }
 
 class GalaxyClient extends Client {
+    public db: PrismaClient;
     public events: Collection<string, GalaxyEvent>;
     public commands: Collection<string, GalaxyCommand>;
 
@@ -22,6 +33,7 @@ class GalaxyClient extends Client {
         this.token = token;
         this.events = new Collection();
         this.commands = new Collection();
+        this.db = new PrismaClient();
     }
 
     public start() {

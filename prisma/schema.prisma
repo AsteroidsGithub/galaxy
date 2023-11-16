@@ -1,0 +1,35 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model DiscordUser {
+  id        Int    @id @default(autoincrement())
+  discordId String @unique
+
+  balance Int    @default(0)
+  items   Item[]
+}
+
+model Item {
+  id      Int @id @default(autoincrement())
+  classId Int
+
+  name        String
+  description String
+  price       Int
+
+  gamblingChance Float @default(0.2)
+
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+  DiscordUser   DiscordUser? @relation(fields: [discordUserId], references: [id])
+  discordUserId Int?
+}
